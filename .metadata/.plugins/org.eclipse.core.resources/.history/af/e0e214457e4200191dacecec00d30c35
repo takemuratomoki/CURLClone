@@ -13,9 +13,6 @@ public class TestCommandManage {
 //		String com[]=p.split(input);
 	}
 	
-//
-//仕様の内容を把握、コマンドを入れ替えることは無いので不採用
-//
 //	public String[] CommandSort(String input[]) {
 //		
 //		String con="";

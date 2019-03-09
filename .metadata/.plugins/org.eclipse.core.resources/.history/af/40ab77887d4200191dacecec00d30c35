@@ -80,18 +80,18 @@ class GetAndPostRequest {
 	}
 }
 
-//private void GetRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	
-//	StringBuilder sb = new StringBuilder();
-//	BufferedReader reader = request.getReader();
-//	try {
-//		String line;
-//		while ((line = reader.readLine()) != null) {
-//			sb.append(line).append('\n');
-//		}
-//	} finally {
-//		reader.close();
-//	}
-//	System.out.println(sb.toString());
-//}
-//	
+private void GetRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	StringBuilder sb = new StringBuilder();
+	BufferedReader reader = request.getReader();
+	try {
+		String line;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line).append('\n');
+		}
+	} finally {
+		reader.close();
+	}
+	System.out.println(sb.toString());
+}
+	
