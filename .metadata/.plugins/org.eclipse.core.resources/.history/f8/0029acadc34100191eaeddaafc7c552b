@@ -1,0 +1,12 @@
+package curlclone;
+
+import java.util.regex.Pattern;
+
+public class TestCommandManage {
+
+	public void main (String srg[]) {
+		Pattern p = Pattern.compile("[\\s]+");
+		
+	}
+	
+}

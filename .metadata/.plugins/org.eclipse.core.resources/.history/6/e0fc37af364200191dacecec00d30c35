@@ -13,7 +13,7 @@ public class TestCommandManage {
 //		String com[]=p.split(input);
 	}
 	
-	public String[] CommandSort(String input[]) {
+	public String[] CommandManage(String input[]) {
 		
 		String con="";
 

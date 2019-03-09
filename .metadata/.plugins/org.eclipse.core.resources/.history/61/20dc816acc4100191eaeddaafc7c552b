@@ -1,0 +1,23 @@
+package curlclone;
+
+import java.util.regex.Pattern;
+
+//コマンド取得のための処理のメモ
+//空白でセパレートして配列として文字列を取得したとする
+//まずurlを先頭に、その他配列の番号を前に詰める
+//-？が入っている配列の番号に相当する文字列は、n,n+1(n=1,3,5...)のどちらかに入っていると考え、n番目に-?を、n+1に文字列を並べ替える
+public class TestCommandManage {
+
+	public void main (String srg[]) {
+
+	}
+	
+	public String GetURL(String input) {
+		Pattern p = Pattern.compile("[\\s]+");
+		
+		String com[]=p.split(input);
+		
+		
+	}
+	
+}

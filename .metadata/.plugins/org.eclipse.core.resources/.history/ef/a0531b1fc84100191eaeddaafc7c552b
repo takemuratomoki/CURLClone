@@ -1,0 +1,19 @@
+package curlclone;
+
+import java.util.regex.Pattern;
+
+public class TestCommandManage {
+
+	public void main (String srg[]) {
+
+	}
+	
+	public String GetURL(String input) {
+		Pattern p = Pattern.compile("[\\s]+");
+		
+		String com[]=p.split(input);
+		
+		
+	}
+	
+}
