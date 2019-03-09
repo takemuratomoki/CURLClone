@@ -35,8 +35,6 @@ class GetAndPostRequest {
 			urlConn.setRequestMethod("GET");
 //			urlConn.setRequestMethod("POST");
 			
-			//urlConn.setRequestProperty();
-			
 			urlConn.connect();
 			
 			int status = urlConn.getResponseCode();
@@ -46,10 +44,6 @@ class GetAndPostRequest {
 			if(status == HttpURLConnection.HTTP_OK) {
 				
 				in = urlConn.getInputStream();
-				
-				InputStreamReader testes = new InputStreamReader(in);
-				
-				System.out.println(in);
 				
 				reader = new BufferedReader(new InputStreamReader(in));
 				
@@ -78,20 +72,6 @@ class GetAndPostRequest {
 			}
 		}
 	}
-}
+	
 
-private void GetRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	StringBuilder sb = new StringBuilder();
-	BufferedReader reader = request.getReader();
-	try {
-		String line;
-		while ((line = reader.readLine()) != null) {
-			sb.append(line).append('\n');
-		}
-	} finally {
-		reader.close();
-	}
-	System.out.println(sb.toString());
 }
-	
