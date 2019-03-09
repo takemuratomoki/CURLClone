@@ -12,18 +12,20 @@ public class App {
 }
 
 class HTTPRequest{
-	public void run(String command) {
+	public void run(String com[]) {
 		
 		//コマンド処理
-		Pattern p = Pattern.compile("[\\s]+");
-		String com[] = p.split(command);
+		public void main (String srg[]) {
+			Pattern p = Pattern.compile("[\\s]+");
+			String com[]=p.split(input);
+		}
 		
-		//コマンド判定
-		for(int i = 0 ; i < com.length -1 ; i ++ ) {
+		
+		for(int i = 0 ; i < input.length -1 ; i ++ ) {
 			
-			if(com[i].charAt(0) == '-') {
+			if(input[i].charAt(0) == '-') {
 			
-				switch(com[i].charAt(1)) {
+				switch(input[i].charAt(1)) {
 					case 'o':
 						break;
 						
@@ -37,7 +39,6 @@ class HTTPRequest{
 						break;
 				}
 			}
-			
 			
 			
 		}

@@ -18,7 +18,8 @@ class HTTPRequest{
 		Pattern p = Pattern.compile("[\\s]+");
 		String com[] = p.split(command);
 		
-		//ƒRƒ}ƒ“ƒh”»’è
+		
+		
 		for(int i = 0 ; i < com.length -1 ; i ++ ) {
 			
 			if(com[i].charAt(0) == '-') {
@@ -37,7 +38,6 @@ class HTTPRequest{
 						break;
 				}
 			}
-			
 			
 			
 		}
