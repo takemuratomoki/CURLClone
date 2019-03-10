@@ -5,24 +5,20 @@ package curlclone;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.io.BufferedReader;
 import java.lang.StringBuilder;
 
 public class App {
 
     public static void main(String[] args) {
-    	String commm = "-d http://httpbin.org/";
         HTTPRequest h = new HTTPRequest();
-        h.run(commm);
+        h.run("command");
     }
 }
 
@@ -35,7 +31,7 @@ class HTTPRequest{
 		Pattern p = Pattern.compile("[\\s]+");
 		String com[] = p.split(command);
 		
-		String strUrl = "http://httpbin.org/";
+		String strUrl = "https://www.yahoo.co.jp/";
 		
 		HttpURLConnection urlConn = null;
 		InputStream in = null;
@@ -44,7 +40,7 @@ class HTTPRequest{
 		try {
 			//url指定
 //			URL url = new URL(com.last);
-			URL url = new URL("http://httpbin.org/");
+			URL url = new URL("https://www.yahoo.co.jp/");
 			
 			//コネクション取得
 			urlConn = (HttpURLConnection) url.openConnection();
@@ -71,10 +67,12 @@ class HTTPRequest{
 							break;
 							
 						case 'd'://パラメーター付きポスト送信？
+							//ポストに設定
 							urlConn.setRequestMethod("POST");
+							//リクエストのボディ送信を許可
 							urlConn.setDoOutput(true);
-							
-						
+							//レスポンスのボディ受信を許可
+							urlConn.setDoInput(true);
 							
 							break;
 					}
@@ -100,20 +98,15 @@ class HTTPRequest{
 							break;
 							
 						case 'd'://パラメーター付きポスト送信？
-							OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
 							
-							//Postするデータを入力
-							String postStr = "key=value&key1=value1";
-							PrintStream ps = new PrintStream(os);
-							//データをPost
-							ps.print(postStr);
-							ps.close();
+							OutputStream outputStream = urlConn.getOutputStream();
+							HashMap keyValues = new HashMap<>();
 							
-							}
+							keyValues.put("key", "value")
 							break;
 					}
 				}			
-			
+			}
 			
 			//以下読み出し
 			int status = urlConn.getResponseCode();

@@ -20,9 +20,8 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-    	String commm = "-d http://httpbin.org/";
         HTTPRequest h = new HTTPRequest();
-        h.run(commm);
+        h.run("command");
     }
 }
 
@@ -44,7 +43,7 @@ class HTTPRequest{
 		try {
 			//url指定
 //			URL url = new URL(com.last);
-			URL url = new URL("http://httpbin.org/");
+			URL url = new URL("https://www.yahoo.co.jp/");
 			
 			//コネクション取得
 			urlConn = (HttpURLConnection) url.openConnection();
@@ -74,7 +73,14 @@ class HTTPRequest{
 							urlConn.setRequestMethod("POST");
 							urlConn.setDoOutput(true);
 							
-						
+							OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
+							
+							//Postするデータを入力
+							String postStr = "key=value&key1=value1";
+							PrintStream ps = new PrintStream(os);
+							//データをPost
+							ps.print(postStr);
+							ps.close();
 							
 							break;
 					}
@@ -100,14 +106,6 @@ class HTTPRequest{
 							break;
 							
 						case 'd'://パラメーター付きポスト送信？
-							OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
-							
-							//Postするデータを入力
-							String postStr = "key=value&key1=value1";
-							PrintStream ps = new PrintStream(os);
-							//データをPost
-							ps.print(postStr);
-							ps.close();
 							
 							}
 							break;
