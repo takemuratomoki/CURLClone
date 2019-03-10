@@ -215,4 +215,19 @@ class HTTPRequest{
 			}
 		}
 	}
+	
+	
+//	//オプションの実行
+//	if(Option[0]) {//-o
+//		
+//	}
+//	if(Option[1]) {//-v
+//		
+//	}
+//	if(Option[2]) {//-X
+//		
+//	}
+//	if(Option[3]) {//-d
+//		
+//	}
 }
