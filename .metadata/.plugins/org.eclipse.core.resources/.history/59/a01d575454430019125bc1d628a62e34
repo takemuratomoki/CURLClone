@@ -23,7 +23,7 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-    	String commm = "-o test.txt -v http://httpbin.org/";
+    	String commm = "http://httpbin.org/";
         HTTPRequest h = new HTTPRequest();
         h.run(commm);
     }
@@ -117,11 +117,6 @@ class HTTPRequest{
 				}
 				System.out.print(reqheader + "\r\n");
 				
-				//ファイル出力②
-				if(Option[0]) {
-					fw.write(reqheader+"\r\n");
-				}
-				
 			}
 			if(Option[2]) {//-X
 
@@ -186,11 +181,6 @@ class HTTPRequest{
 						resheader += "<" + headerKey + ":" + resheaders.get(headerKey)+"\r\n";
 					}
 					System.out.print(resheader +"\r\n");
-					
-					//ファイル出力②
-					if(Option[0]) {
-						fw.write(resheader+"\r\n");
-					}
 				}
 				if(Option[2]) {//-X
 					

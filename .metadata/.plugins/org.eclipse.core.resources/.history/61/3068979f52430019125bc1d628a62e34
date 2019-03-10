@@ -23,7 +23,7 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-    	String commm = "-o test.txt -v http://httpbin.org/";
+    	String commm = "-v -d key=value -X GET http://httpbin.org/post";
         HTTPRequest h = new HTTPRequest();
         h.run(commm);
     }
@@ -67,10 +67,6 @@ class HTTPRequest{
 					switch(com[i].charAt(1)) {
 						case 'o'://ファイル出力を指定
 							Option[0]=true;
-							//ファイル出力①
-							fw = new FileWriter(com[i+1]);
-							
-							
 							break;
 							
 						case 'v'://リクエスト、レスポンスのヘッダ、ボディを表示
@@ -84,10 +80,9 @@ class HTTPRequest{
 								urlConn.setRequestMethod("POST");
 							}else if(com[i+1].equals("GET")) {
 								urlConn.setRequestMethod("GET");
+							}else {//対応しないメソッド
+								throw new RuntimeException();
 							}
-//							else {//対応しないメソッド
-//								throw new RuntimeException();
-//							}
 							break;
 							
 						case 'd'://パラメーター付きポスト送信？
@@ -117,17 +112,12 @@ class HTTPRequest{
 				}
 				System.out.print(reqheader + "\r\n");
 				
-				//ファイル出力②
-				if(Option[0]) {
-					fw.write(reqheader+"\r\n");
-				}
-				
 			}
 			if(Option[2]) {//-X
 
 			}
 			if(Option[3]) {//-d
-//				urlConn.setRequestMethod("POST");
+				urlConn.setRequestMethod("POST");
 				urlConn.setDoOutput(true);
 			}
 			
@@ -186,11 +176,6 @@ class HTTPRequest{
 						resheader += "<" + headerKey + ":" + resheaders.get(headerKey)+"\r\n";
 					}
 					System.out.print(resheader +"\r\n");
-					
-					//ファイル出力②
-					if(Option[0]) {
-						fw.write(resheader+"\r\n");
-					}
 				}
 				if(Option[2]) {//-X
 					
@@ -201,7 +186,11 @@ class HTTPRequest{
 				
 
 				
-
+				//ファイル出力①
+				if(Option[0]) {//-o
+					fw = new FileWriter("testfilename.txt");
+				}
+				
 				while((line = reader.readLine()) != null) {
 //					output.append(line);
 					System.out.println(line+"\n");

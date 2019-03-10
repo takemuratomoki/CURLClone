@@ -23,7 +23,7 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-    	String commm = "-o test.txt -v http://httpbin.org/";
+    	String commm = "-o test.txt http://httpbin.org/";
         HTTPRequest h = new HTTPRequest();
         h.run(commm);
     }
