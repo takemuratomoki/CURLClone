@@ -15,15 +15,12 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-        HTTPRequest h = new HTTPRequest();
-        h.run("command");
+        
     }
 }
 
 class HTTPRequest{
 	public void run(String command) {
-		
-		String filename = "";
 		
 		//コマンド処理
 		Pattern p = Pattern.compile("[\\s]+");
@@ -37,14 +34,11 @@ class HTTPRequest{
 		
 		try {
 			//url指定
-//			URL url = new URL(com[com.length-1]);
-			URL url = new URL("https://www.yahoo.co.jp/");
+			URL url = new URL(com[com.length-1]);
 			
 			//コネクション取得
 			urlConn = (HttpURLConnection) url.openConnection();
 
-			//初期状態としてGET
-			urlConn.setRequestMethod("GET");
 			
 			//コマンド判定
 			for(int i = 0 ; i < com.length -1 ; i ++ ) {
@@ -59,57 +53,12 @@ class HTTPRequest{
 							break;
 							
 						case 'X'://Postの指定
-							if(com[i+1].equals("POST")) {
-								urlConn.setRequestMethod("POST");
-							}
 							break;
 							
 						case 'd'://パラメーター付きポスト
 							break;
 					}
 				}			
-			}
-			
-			//コネクト実行
-			urlConn.connect();
-			
-			int status = urlConn.getResponseCode();
-			
-			System.out.println("HTTPステータス："+ status);
-			
-			if(status == HttpURLConnection.HTTP_OK) {
-				
-				in = urlConn.getInputStream();
-				
-				InputStreamReader testes = new InputStreamReader(in);
-				
-				System.out.println(in);
-				
-				reader = new BufferedReader(new InputStreamReader(in));
-				
-				StringBuilder output = new StringBuilder();
-				String line;
-				
-				while((line = reader.readLine()) != null) {
-//					output.append(line);
-					System.out.println(line);
-				}
-				
-				System.out.println(output.toString());
-			}
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(reader != null) {
-					reader.close();
-				}
-				if(urlConn != null) {
-					urlConn.disconnect();
-				}
-			}catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}
