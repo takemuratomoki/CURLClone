@@ -78,28 +78,27 @@ class HTTPRequest{
 						case 'd'://パラメーター付きポスト送信？
 							urlConn.setRequestMethod("POST");
 							urlConn.setDoOutput(true);
-							
+													
 							break;
 					}
 				}			
 			}
 			
 			//リクエストヘッダ取得(-vオプション？)
-			Map<String , String> reqheaders = new HashMap<String , String>();
-			reqheaders.put("HOST", url.getHost());
-			reqheaders.put("Method", urlConn.getRequestMethod());
+			Map reqheaders = urlConn.getRequestProperties();
 			Iterator reqheaderIt = reqheaders.keySet().iterator();
-			String reqheader = "";
+			String reqheader = null;
 			while(reqheaderIt.hasNext()) {
 				String headerKey = (String)reqheaderIt.next();
 				reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
 			}
 			System.out.print(reqheader + "\r\n");
 			
-			
 			//コネクト実行
 			urlConn.connect();
 			
+
+
 			
 			//コネクト実行後コマンド判定
 			for(int i = 0 ; i < com.length -1 ; i ++ ) {

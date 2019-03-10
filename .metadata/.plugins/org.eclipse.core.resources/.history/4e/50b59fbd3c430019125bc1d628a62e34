@@ -86,15 +86,18 @@ class HTTPRequest{
 			
 			//リクエストヘッダ取得(-vオプション？)
 			Map<String , String> reqheaders = new HashMap<String , String>();
-			reqheaders.put("HOST", url.getHost());
 			reqheaders.put("Method", urlConn.getRequestMethod());
-			Iterator reqheaderIt = reqheaders.keySet().iterator();
-			String reqheader = "";
-			while(reqheaderIt.hasNext()) {
-				String headerKey = (String)reqheaderIt.next();
-				reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
-			}
-			System.out.print(reqheader + "\r\n");
+			reqheaders.put("HOST", url.getHost());
+			reqheaders.put("UserAgent", urlConn.getRequestProperty("User-Agent"));
+			
+//			Map reqheaders = urlConn.getRequestProperties();
+//			Iterator reqheaderIt = reqheaders.keySet().iterator();
+//			String reqheader = "";
+//			while(reqheaderIt.hasNext()) {
+//				String headerKey = (String)reqheaderIt.next();
+//				reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
+//			}
+//			System.out.print(reqheader + "\r\n");
 			
 			
 			//コネクト実行

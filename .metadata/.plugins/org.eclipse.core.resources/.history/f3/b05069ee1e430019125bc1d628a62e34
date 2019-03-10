@@ -55,8 +55,6 @@ class HTTPRequest{
 			//初期状態としてGET
 			urlConn.setRequestMethod("GET");
 			
-
-			
 			//コマンド判定
 			for(int i = 0 ; i < com.length -1 ; i ++ ) {
 				
@@ -78,24 +76,13 @@ class HTTPRequest{
 						case 'd'://パラメーター付きポスト送信？
 							urlConn.setRequestMethod("POST");
 							urlConn.setDoOutput(true);
-							
+													
 							break;
 					}
 				}			
 			}
 			
-			//リクエストヘッダ取得(-vオプション？)
-			Map<String , String> reqheaders = new HashMap<String , String>();
-			reqheaders.put("HOST", url.getHost());
-			reqheaders.put("Method", urlConn.getRequestMethod());
-			Iterator reqheaderIt = reqheaders.keySet().iterator();
-			String reqheader = "";
-			while(reqheaderIt.hasNext()) {
-				String headerKey = (String)reqheaderIt.next();
-				reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
-			}
-			System.out.print(reqheader + "\r\n");
-			
+
 			
 			//コネクト実行
 			urlConn.connect();
@@ -171,7 +158,15 @@ class HTTPRequest{
 				StringBuilder output = new StringBuilder();
 				String line;
 				
-
+				//リクエストヘッダ取得(-vオプション？)
+				Map reqheaders = urlConn.getRequestProperties();
+				Iterator reqheaderIt = reqheaders.keySet().iterator();
+				String reqheader = null;
+				while(reqheaderIt.hasNext()) {
+					String headerKey = (String)reqheaderIt.next();
+					reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
+				}
+				System.out.print(reqheader + "\r\n");
 				
 				//レスポンスヘッダ取得(-vオプション？)
 				Map resheaders = urlConn.getHeaderFields();

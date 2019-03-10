@@ -86,8 +86,11 @@ class HTTPRequest{
 			
 			//リクエストヘッダ取得(-vオプション？)
 			Map<String , String> reqheaders = new HashMap<String , String>();
-			reqheaders.put("HOST", url.getHost());
 			reqheaders.put("Method", urlConn.getRequestMethod());
+			reqheaders.put("HOST", url.getHost());
+			reqheaders.put("UserAgent", urlConn.getRequestProperty("User-Agent"));
+			
+
 			Iterator reqheaderIt = reqheaders.keySet().iterator();
 			String reqheader = "";
 			while(reqheaderIt.hasNext()) {
