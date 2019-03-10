@@ -34,7 +34,6 @@ class HTTPRequest{
 		
 		String filename = "";
 		boolean Option[]= {false,false,false,false};
-		FileWriter fw = null;
 		
 		//コマンド処理
 		Pattern p = Pattern.compile("[\\s]+");
@@ -70,11 +69,22 @@ class HTTPRequest{
 							
 						case 'v'://リクエスト、レスポンスのヘッダ、ボディを表示
 							Option[1]=true;
+							//リクエストヘッダ取得(-vオプション？)
+							Map<String , String> reqheaders = new HashMap<String , String>();
+							reqheaders.put("HOST", url.getHost());
+							reqheaders.put("Method", urlConn.getRequestMethod());
+							Iterator reqheaderIt = reqheaders.keySet().iterator();
+							String reqheader = "";
+							while(reqheaderIt.hasNext()) {
+								String headerKey = (String)reqheaderIt.next();
+								reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
+							}
+							System.out.print(reqheader + "\r\n");
+							
 							break;
 							
 						case 'X'://Postの指定
 							Option[2]=true;
-							
 							if(com[i+1].equals("POST")) {
 								urlConn.setRequestMethod("POST");
 							}
@@ -82,62 +92,50 @@ class HTTPRequest{
 							
 						case 'd'://パラメーター付きポスト送信？
 							Option[3]=true;
-							break;
+							urlConn.setRequestMethod("POST");
+							urlConn.setDoOutput(true);
 							
+							break;
 					}
 				}			
 			}
 			
-			//オプションの実行
-			if(Option[0]) {//-o
-				
-			}
-			if(Option[1]) {//-v
-				//リクエストヘッダ取得(-vオプション？)
-				Map<String , String> reqheaders = new HashMap<String , String>();
-				reqheaders.put("HOST", url.getHost());
-				reqheaders.put("Method", urlConn.getRequestMethod());
-				Iterator reqheaderIt = reqheaders.keySet().iterator();
-				String reqheader = "";
-				while(reqheaderIt.hasNext()) {
-					String headerKey = (String)reqheaderIt.next();
-					reqheader += ">" + headerKey + ":" + reqheaders.get(headerKey)+"\r\n";
-				}
-				System.out.print(reqheader + "\r\n");
-				
-			}
-			if(Option[2]) {//-X
 
-			}
-			if(Option[3]) {//-d
-				urlConn.setRequestMethod("POST");
-				urlConn.setDoOutput(true);
-			}
 			
 			//コネクト実行
 			urlConn.connect();
 			
 			
-			//コネクト実行後オプションの実行
-			if(Option[0]) {//-o
+			//コネクト実行後コマンド判定
+			for(int i = 0 ; i < com.length -1 ; i ++ ) {
 				
-			}
-			if(Option[1]) {//-v
+				if(com[i].charAt(0) == '-') {
 				
-			}
-			if(Option[2]) {//-X
-				
-			}
-			if(Option[3]) {//-d
-				OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
-				
-				//Postするデータを入力
-				String postStr = "key=value&key1=value1";
-				PrintStream ps = new PrintStream(os);
-				//データをPost
-				ps.print(postStr);
-				ps.close();
-			}
+					switch(com[i].charAt(1)) {
+						case 'o'://ファイル出力を指定
+							break;
+							
+						case 'v'://リクエスト、レスポンスのヘッダ、ボディを表示
+							break;
+							
+						case 'X'://Postの指定
+							break;
+							
+						case 'd'://パラメーター付きポスト送信？
+							OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
+							
+							//Postするデータを入力
+							String postStr = "key=value&key1=value1";
+							PrintStream ps = new PrintStream(os);
+							//データをPost
+							ps.print(postStr);
+							ps.close();
+							
+							}
+							break;
+					}
+				}			
+			
 			
 			//以下読み出し
 			int status = urlConn.getResponseCode();
@@ -146,7 +144,35 @@ class HTTPRequest{
 			
 			if(status == HttpURLConnection.HTTP_OK) {
 				
-
+				//ステータスクリア後コマンド判定
+				for(int i = 0 ; i < com.length -1 ; i ++ ) {
+					
+					if(com[i].charAt(0) == '-') {
+					
+						switch(com[i].charAt(1)) {
+							case 'o'://ファイル出力を指定
+								break;
+								
+							case 'v'://リクエスト、レスポンスのヘッダ、ボディを表示
+								//レスポンスヘッダ取得(-vオプション？)
+								Map resheaders = urlConn.getHeaderFields();
+								Iterator resheaderIt = resheaders.keySet().iterator();
+								String resheader = "";
+								while(resheaderIt.hasNext()) {
+									String headerKey = (String)resheaderIt.next();
+									resheader += "<" + headerKey + ":" + resheaders.get(headerKey)+"\r\n";
+								}
+								System.out.print(resheader +"\r\n");
+								break;
+								
+							case 'X'://Postの指定
+								break;
+								
+							case 'd'://パラメーター付きポスト送信？
+								}
+								break;
+						}
+					}	
 				
 				in = urlConn.getInputStream();
 				
@@ -158,48 +184,25 @@ class HTTPRequest{
 				String line;
 				
 
-				//ステータスクリア後オプションの実行
-				if(Option[1]) {//-v
-					//レスポンスヘッダ取得(-vオプション？)
-					Map resheaders = urlConn.getHeaderFields();
-					Iterator resheaderIt = resheaders.keySet().iterator();
-					String resheader = "";
-					while(resheaderIt.hasNext()) {
-						String headerKey = (String)resheaderIt.next();
-						resheader += "<" + headerKey + ":" + resheaders.get(headerKey)+"\r\n";
-					}
-					System.out.print(resheader +"\r\n");
-				}
-				if(Option[2]) {//-X
-					
-				}
-				if(Option[3]) {//-d
-					
-				}
 				
 
 				
-				//ファイル出力①
-				if(Option[0]) {//-o
-					fw = new FileWriter("testfilename.txt");
-				}
+				//file書き出し①
+				FileWriter fw = new FileWriter("testfilename.txt");
 				
 				while((line = reader.readLine()) != null) {
 //					output.append(line);
 					System.out.println(line+"\n");
 					
 					//ファイル出力②
-					if(Option[0]) {
-						fw.write(line+"\r\n");
-					}
+					fw.write(line+"\r\n");
+					
 				}
 				
 				System.out.println(output.toString());
 				
 				//ファイル出力③
-				if(Option[0]) {
-					fw.close();
-				}
+				fw.close();
 			}
 			
 		}catch (IOException e) {
@@ -217,19 +220,4 @@ class HTTPRequest{
 			}
 		}
 	}
-	
-	
-//	//オプションの実行
-//	if(Option[0]) {//-o
-//		
-//	}
-//	if(Option[1]) {//-v
-//		
-//	}
-//	if(Option[2]) {//-X
-//		
-//	}
-//	if(Option[3]) {//-d
-//		
-//	}
 }

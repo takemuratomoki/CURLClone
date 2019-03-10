@@ -34,7 +34,6 @@ class HTTPRequest{
 		
 		String filename = "";
 		boolean Option[]= {false,false,false,false};
-		FileWriter fw = null;
 		
 		//コマンド処理
 		Pattern p = Pattern.compile("[\\s]+");
@@ -146,19 +145,10 @@ class HTTPRequest{
 			
 			if(status == HttpURLConnection.HTTP_OK) {
 				
-
-				
-				in = urlConn.getInputStream();
-				
-				InputStreamReader testes = new InputStreamReader(in);
-				
-				reader = new BufferedReader(new InputStreamReader(in));
-				
-				StringBuilder output = new StringBuilder();
-				String line;
-				
-
 				//ステータスクリア後オプションの実行
+				if(Option[0]) {//-o
+					
+				}
 				if(Option[1]) {//-v
 					//レスポンスヘッダ取得(-vオプション？)
 					Map resheaders = urlConn.getHeaderFields();
@@ -177,29 +167,36 @@ class HTTPRequest{
 					
 				}
 				
+				
+				in = urlConn.getInputStream();
+				
+				InputStreamReader testes = new InputStreamReader(in);
+				
+				reader = new BufferedReader(new InputStreamReader(in));
+				
+				StringBuilder output = new StringBuilder();
+				String line;
+				
 
 				
-				//ファイル出力①
-				if(Option[0]) {//-o
-					fw = new FileWriter("testfilename.txt");
-				}
+
+				
+				//file書き出し①
+				FileWriter fw = new FileWriter("testfilename.txt");
 				
 				while((line = reader.readLine()) != null) {
 //					output.append(line);
 					System.out.println(line+"\n");
 					
 					//ファイル出力②
-					if(Option[0]) {
-						fw.write(line+"\r\n");
-					}
+					fw.write(line+"\r\n");
+					
 				}
 				
 				System.out.println(output.toString());
 				
 				//ファイル出力③
-				if(Option[0]) {
-					fw.close();
-				}
+				fw.close();
 			}
 			
 		}catch (IOException e) {

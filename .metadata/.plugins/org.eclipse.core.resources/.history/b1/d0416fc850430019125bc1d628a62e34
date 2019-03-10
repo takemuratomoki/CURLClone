@@ -179,7 +179,7 @@ class HTTPRequest{
 				
 
 				
-				//ファイル出力①
+				//file書き出し①
 				if(Option[0]) {//-o
 					fw = new FileWriter("testfilename.txt");
 				}
@@ -188,8 +188,8 @@ class HTTPRequest{
 //					output.append(line);
 					System.out.println(line+"\n");
 					
-					//ファイル出力②
 					if(Option[0]) {
+					//ファイル出力②
 						fw.write(line+"\r\n");
 					}
 				}
@@ -197,9 +197,7 @@ class HTTPRequest{
 				System.out.println(output.toString());
 				
 				//ファイル出力③
-				if(Option[0]) {
-					fw.close();
-				}
+				fw.close();
 			}
 			
 		}catch (IOException e) {
