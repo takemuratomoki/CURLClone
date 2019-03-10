@@ -20,7 +20,7 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-    	String commm = "-d http://httpbin.org/";
+    	String commm = "http://httpbin.org/";
         HTTPRequest h = new HTTPRequest();
         h.run(commm);
     }
@@ -44,7 +44,7 @@ class HTTPRequest{
 		try {
 			//url指定
 //			URL url = new URL(com.last);
-			URL url = new URL("http://httpbin.org/post");
+			URL url = new URL("http://httpbin.org/");
 			
 			//コネクション取得
 			urlConn = (HttpURLConnection) url.openConnection();
@@ -73,7 +73,9 @@ class HTTPRequest{
 						case 'd'://パラメーター付きポスト送信？
 							urlConn.setRequestMethod("POST");
 							urlConn.setDoOutput(true);
-													
+							
+						
+							
 							break;
 					}
 				}			

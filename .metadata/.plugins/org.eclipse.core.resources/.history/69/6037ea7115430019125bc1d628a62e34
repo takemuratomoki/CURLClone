@@ -44,7 +44,7 @@ class HTTPRequest{
 		try {
 			//url指定
 //			URL url = new URL(com.last);
-			URL url = new URL("http://httpbin.org/post");
+			URL url = new URL("http://httpbin.org/");
 			
 			//コネクション取得
 			urlConn = (HttpURLConnection) url.openConnection();
@@ -98,14 +98,14 @@ class HTTPRequest{
 							break;
 							
 						case 'd'://パラメーター付きポスト送信？
-							OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
-							
-							//Postするデータを入力
-							String postStr = "key=value&key1=value1";
-							PrintStream ps = new PrintStream(os);
-							//データをPost
-							ps.print(postStr);
-							ps.close();
+//							OutputStream os = urlConn.getOutputStream();//post用のoutputstreamを取得
+//							
+//							//Postするデータを入力
+//							String postStr = "key=value&key1=value1";
+//							PrintStream ps = new PrintStream(os);
+//							//データをPost
+//							ps.print(postStr);
+//							ps.close();
 							
 							}
 							break;
