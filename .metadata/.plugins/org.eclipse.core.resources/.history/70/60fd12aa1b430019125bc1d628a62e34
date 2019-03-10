@@ -155,7 +155,7 @@ class HTTPRequest{
 				StringBuilder output = new StringBuilder();
 				String line;
 				
-				//レスポンスヘッダ取得(-vオプション？)
+				//ヘッダ取得(-vオプション？)
 				Map headers = urlConn.getHeaderFields();
 				Iterator headerIt = headers.keySet().iterator();
 				String header = null;

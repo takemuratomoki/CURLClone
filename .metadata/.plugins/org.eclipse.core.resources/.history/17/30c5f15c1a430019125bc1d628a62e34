@@ -3,8 +3,6 @@
  */
 package curlclone;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 
@@ -123,27 +121,6 @@ class HTTPRequest{
 			
 			if(status == HttpURLConnection.HTTP_OK) {
 				
-				//ステータスクリア後コマンド判定
-				for(int i = 0 ; i < com.length -1 ; i ++ ) {
-					
-					if(com[i].charAt(0) == '-') {
-					
-						switch(com[i].charAt(1)) {
-							case 'o'://ファイル出力を指定
-								break;
-								
-							case 'v'://リクエスト、レスポンスのヘッダ、ボディを表示
-								break;
-								
-							case 'X'://Postの指定
-								break;
-								
-							case 'd'://パラメーター付きポスト送信？
-								}
-								break;
-						}
-					}	
-				
 				in = urlConn.getInputStream();
 				
 				InputStreamReader testes = new InputStreamReader(in);
@@ -154,16 +131,6 @@ class HTTPRequest{
 				
 				StringBuilder output = new StringBuilder();
 				String line;
-				
-				//レスポンスヘッダ取得(-vオプション？)
-				Map headers = urlConn.getHeaderFields();
-				Iterator headerIt = headers.keySet().iterator();
-				String header = null;
-				while(headerIt.hasNext()) {
-					String headerKey = (String)headerIt.next();
-					header += headerKey + ":" + headers.get(headerKey)+"\r\n";
-				}
-				System.out.print(header);
 				
 				//file書き出し①
 				FileWriter fw = new FileWriter("testfilename.txt");
