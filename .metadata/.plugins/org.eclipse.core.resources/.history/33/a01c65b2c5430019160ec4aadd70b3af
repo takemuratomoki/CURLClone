@@ -20,9 +20,7 @@ import java.lang.StringBuilder;
 public class App {
 
     public static void main(String[] args) {
-
-    	String commm = args[0];
-
+    	String commm = "-o test.txt -v http://httpbin.org/";
         HTTPRequest h = new HTTPRequest();
         h.run(commm);
     }

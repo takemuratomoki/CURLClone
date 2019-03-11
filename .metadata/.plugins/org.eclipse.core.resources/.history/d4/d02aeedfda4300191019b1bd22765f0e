@@ -19,9 +19,9 @@ import java.lang.StringBuilder;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String args) {
 
-    	String commm = args[0];
+    	String commm = args;
 
         HTTPRequest h = new HTTPRequest();
         h.run(commm);

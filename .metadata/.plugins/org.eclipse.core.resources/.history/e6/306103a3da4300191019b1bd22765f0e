@@ -19,9 +19,17 @@ import java.lang.StringBuilder;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String args) {
 
-    	String commm = args[0];
+    	InputStreamReader isr = new InputStreamReader(System.in);
+    	BufferedReader br = new BufferedReader(isr);
+    	String commm = null;
+    	try {
+    		commm = br.readLine();
+    		br.close();
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    	}
 
         HTTPRequest h = new HTTPRequest();
         h.run(commm);

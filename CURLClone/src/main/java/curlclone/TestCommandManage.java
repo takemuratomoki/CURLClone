@@ -1,63 +1,63 @@
-package curlclone;
-
-import java.util.regex.Pattern;
-
-//コマンド取得のための処理のメモ
-//空白でセパレートして配列として文字列を取得したとする、URLは最後に来る
-//URL以外の要素を判別
-//-？が入っている配列の番号に相当する文字列は、n,n+1(n=1,3,5...)のどちらかに入っていると考え、n番目に-?を、n+1に文字列を並べ替える
-public class TestCommandManage {
-
-	public void main (String srg[]) {
-//		Pattern p = Pattern.compile("[\\s]+");
-//		String com[]=p.split(input);
-	}
-	
+//package curlclone;
 //
-//仕様の内容を把握、コマンドを入れ替えることは無いので不採用
+//import java.util.regex.Pattern;
 //
-//	public String[] CommandSort(String input[]) {
+////コマンド取得のための処理のメモ
+////空白でセパレートして配列として文字列を取得したとする、URLは最後に来る
+////URL以外の要素を判別
+////-？が入っている配列の番号に相当する文字列は、n,n+1(n=1,3,5...)のどちらかに入っていると考え、n番目に-?を、n+1に文字列を並べ替える
+//public class TestCommandManage {
+//
+//	public void main (String srg[]) {
+////		Pattern p = Pattern.compile("[\\s]+");
+////		String com[]=p.split(input);
+//	}
+//	
+////
+////仕様の内容を把握、コマンドを入れ替えることは無いので不採用
+////
+////	public String[] CommandSort(String input[]) {
+////		
+////		String con="";
+////
+////		for(int i = 0 ; i < input.length - 1 ; i = i +2) {
+////			if(input[i].charAt(0) == '-') {
+////				
+////			}else {
+////				con = input[i];
+////				input[i]=input[i+1];
+////				input[1] = con;
+////			}
+////			con = "";
+////		}
+////		
+////		return input;
+////	}
+//	
+//	public void GetOprion(String input[]) {
 //		
-//		String con="";
-//
-//		for(int i = 0 ; i < input.length - 1 ; i = i +2) {
+//		for(int i = 0 ; i < input.length -1 ; i ++ ) {
+//			
 //			if(input[i].charAt(0) == '-') {
-//				
-//			}else {
-//				con = input[i];
-//				input[i]=input[i+1];
-//				input[1] = con;
+//			
+//				switch(input[i].charAt(1)) {
+//					case 'o':
+//						break;
+//						
+//					case 'v':
+//						break;
+//						
+//					case 'X':
+//						break;
+//						
+//					case 'd':
+//						break;
+//				}
 //			}
-//			con = "";
+//			
+//			
 //		}
 //		
-//		return input;
 //	}
-	
-	public void GetOprion(String input[]) {
-		
-		for(int i = 0 ; i < input.length -1 ; i ++ ) {
-			
-			if(input[i].charAt(0) == '-') {
-			
-				switch(input[i].charAt(1)) {
-					case 'o':
-						break;
-						
-					case 'v':
-						break;
-						
-					case 'X':
-						break;
-						
-					case 'd':
-						break;
-				}
-			}
-			
-			
-		}
-		
-	}
-	
-}
+//	
+//}
